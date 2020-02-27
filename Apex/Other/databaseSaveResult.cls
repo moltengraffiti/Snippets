@@ -1,11 +1,11 @@
 /**
  * @File Name          : databaseSaveResult.cls
- * @Description        : 
+ * @Description        :
  * @Author             : Sam Reilly
- * @Group              : 
+ * @Group              :
  * @Last Modified By   : Sam Reilly
- * @Last Modified On   : 27/02/2020, 10:19:43 am
- * @Modification Log   : 
+ * @Last Modified On   : 27/02/2020, 11:17:46 am
+ * @Modification Log   :
  * Ver       Date            Author      		    Modification
  * 1.0    27/02/2020   Sam Reilly     Initial Version
 **/
@@ -13,7 +13,7 @@
         for (Database.SaveResult sr : srList) {
             if (sr.isSuccess()) {
                 System.debug('Record successfully saved ' + sr.getId());
-                pledgeRecordsProcessed += 1;
+                countRecordsProcessed += 1;
             } else {
 
                 for (Database.Error err : sr.getErrors()) {
