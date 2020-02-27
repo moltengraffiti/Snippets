@@ -1,0 +1,82 @@
+<!--
+  @File Name          : ManageChangeItems.page
+  @Description        :
+  @Author             : Sam Reilly
+  @Group              :
+  @Last Modified By   : Sam Reilly
+  @Last Modified On   : 27/02/2020, 12:00:37 pm
+  @Modification Log   :
+  Ver       Date            Author      		    Modification
+  1.0    27/02/2020   Sam Reilly     Initial Version
+-->
+
+<!-->
+Simple VF page for managing 'change items' - custom change list object related to Case object
+-->
+
+<apex:page id="ManageItems" lightningStylesheets="true" standardController="Case" extensions="ManageChangeItemController">
+    <apex:sectionHeader title="Manage Change Items" subtitle="{!Case.CaseNumber} - {!Case.Subject} - Status: {!Case.Status}"
+    />
+    <apex:form id="ItemsForm">
+        <apex:pageBlock >
+
+            <apex:variable var="index" value="{!0}" />
+
+            <apex:pageBlockTable value="{!ciList}" var="c" width="100%">
+
+                <apex:column headerValue="Actions">
+                    <apex:commandButton value="Delete" action="{!deleteItem}" reRender="ItemsForm" immediate="true">
+                        <apex:param name="cId" value="{!c.Id}" assignTo="{!deletionId}" />
+                        <apex:param name="indexNo" value="{!index}" assignTo="{!indexNo}" />
+                    </apex:commandButton>
+                </apex:column>
+
+                <apex:column headervalue="Case">
+                    <apex:variable var="index" value="{!index+1}" />
+                    <apex:outputField value="{!c.Case__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Change Type">
+                    <apex:inputField value="{!c.Change_Type__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Change Detail">
+                    <apex:inputField value="{!c.Change_Detail__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Item Name">
+                    <apex:inputField value="{!c.Item_Name__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Change">
+                    <apex:inputField value="{!c.Change__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Object">
+                    <apex:inputField value="{!c.Object__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Status">
+                    <apex:inputField value="{!c.Item_Status__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Deployment Method">
+                    <apex:inputField value="{!c.Deployment_Method__c}" />
+                </apex:column>
+
+                <apex:column headerValue="Release">
+                    <apex:inputField value="{!c.Release__c}" />
+                </apex:column>
+
+
+
+            </apex:pageBlockTable>
+
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Add Item" action="{!addItem}" />
+                <apex:commandButton value="Save" action="{!saveItem}" />
+                <apex:commandButton value="Cancel" action="{!cancelItem}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
